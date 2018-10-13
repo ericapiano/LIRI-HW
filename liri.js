@@ -6,8 +6,6 @@ const moment = require("moment");
 
 var fs = require("fs");
 
-
-
 // turn on .env to load up envt variables from .env files
 
 require("dotenv").config();
@@ -65,25 +63,27 @@ var bandsInTown = function(functionInfo) {
 
     var datetime = moment(answer[0].datetime.split("T")[0], "YYYY-MM-DD").format("MM-DD-YYYY");
     
-    console.log(
-    "Venue Name: " + answer[0].venue.name + 
-    "\n Venue location: " + answer[0].venue.country + 
-    "\n Event Date: " + datetime
-
-
-  );
+    console.log(`
+    Venue Name: ${answer[0].venue.name}
+    Venue location: ${answer[0].venue.country}
+    Event Date: ${datetime}
+    `);
   }
 });
 
 
 }
 
+// function for doIt
+
 function doIt () {
-  fs.readFile("movies.txt", "utf8", function(error, data) {
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    // console.log(error, data);
     var response = data.split(",")
     userChoice(response[0], response[1]);
   });
 }
+
 
 
 
@@ -102,7 +102,7 @@ var userChoice = function (choice, functionInfo) {
     movieThis (functionInfo);
     break;
     case "do-what-it-says":
-    doIt ();
+    doIt();
     break;
     default: console.log("that is not a command")
 
@@ -120,22 +120,15 @@ var spotifyThis = function (functionInfo) {
       searchQuery = "I Saw The Sign"
   }
 
-    // spotify.search({type: "track", query: "The Sign", artist: "Ace of Base"}, function(err, data) {
-    //   if (err) {
-    //     console.log('Error occurred: ' + err);
-    //   } else {
-    //     console.log(JSON.stringify(data))
-    //   }
-    // })
     spotify.search({ type: 'track', query: searchQuery}, function(err, data) {
       if (err) {
         console.log('Error occurred: ' + err);
       } else {
         console.log(
-          `Artist: ${data.tracks.items[0].album.artists[0].name},
+          `Artist: ${data.tracks.items[0].album.artists[0].name}
+          Title: ${data.tracks.items[0].name}
           Album Name: ${data.tracks.items[0].album.name}
           Link: ${data.tracks.items[0].preview_url}
-          Title: ${data.tracks.items[0].name}
         `)
       }
     })
