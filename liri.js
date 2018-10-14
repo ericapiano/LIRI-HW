@@ -25,14 +25,13 @@ const spotify = new Spotify(spotifyKeys);
 
   request("http://www.omdbapi.com/?t=" + functionInfo.replace(" ", '+') +"&y=&plot=short&apikey=trilogy", function(error, response, body) {
 
-  // If the request is successful (i.e. if the response status code is 200)
   if (!error && response.statusCode === 200) {
     
     console.log(JSON.parse(body).Ratings[1]);
     console.log("The movie's rating is: " + JSON.parse(body).imdbRating + 
     "\n title: " + JSON.parse(body).Title + 
     "\n year: " + JSON.parse(body).Year + 
-    "\n IMBD Tomatoes rating: " + JSON.parse(body).Ratings[0].Value +
+    "\n IMBD rating: " + JSON.parse(body).Ratings[0].Value +
     "\n Rotten Tomatoes rating: " + JSON.parse(body).Ratings[1].Value +
     "\n country: " + JSON.parse(body).Country +
     "\n language: " + JSON.parse(body).Language + 
@@ -52,10 +51,6 @@ var bandsInTown = function(functionInfo) {
   console.log("https://rest.bandsintown.com/artists/" + functionInfo.replace(" ", '') +"/events?app_id=codingbootcamp")
   request("https://rest.bandsintown.com/artists/" + functionInfo.replace(" ", '') +"/events?app_id=codingbootcamp", function(error, response, body) {
 
-  //check to see what is returned when entering a nonexistant movie. create an If statement that console.logs no result
-
-
-  // If the request is successful (i.e. if the response status code is 200)
   if (!error && response.statusCode === 200) {
 
     var answer = JSON.parse(body);
@@ -74,7 +69,7 @@ var bandsInTown = function(functionInfo) {
 
 }
 
-// function for doIt
+// function for do-what-it-says
 
 function doIt () {
   fs.readFile("random.txt", "utf8", function(error, data) {
@@ -116,7 +111,6 @@ var spotifyThis = function (functionInfo) {
   console.log(searchQuery);
   if (!searchQuery) {
 
-  //  console.log('foo')
       searchQuery = "I Saw The Sign"
   }
 
